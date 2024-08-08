@@ -1,11 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { changeFilter } from "../../redux/filtersSlice";
 
-export const SearchBox = ({ value, onChange }) => {
+export const SearchBox = () => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <label>
         Find contacts by name
-        <input type="text" value={value} onChange={onChange} />
+        <input
+          type="text"
+          onChange={(event) => dispatch(changeFilter(event.target.value))}
+        />
       </label>
     </div>
   );

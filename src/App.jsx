@@ -7,12 +7,12 @@ import { selectContacts } from "./redux/selectors";
 
 function App() {
   const contacts = useSelector(selectContacts);
-  const contactItems = contacts?.items || [];
+
   return (
     <div className="container">
       <h1>Phonebook</h1>
       <ContactForm />
-      {contactItems.length !== 0 && <SearchBox />}
+      {contacts.length !== 0 && <SearchBox />}
       <ContactList />
     </div>
   );

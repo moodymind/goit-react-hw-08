@@ -3,9 +3,10 @@ import { ContactForm } from "./components/ContactForm/ContactForm";
 import { ContactList } from "./components/ContactList/ContactList";
 import { SearchBox } from "./components/SearchBox/SearchBox";
 import "./App.css";
-import { selectContacts } from "./redux/selectors";
+import { selectContacts } from "./redux/contacts/selectors";
 import { useEffect } from "react";
-import { fetchContacts } from "./redux/contactsOps";
+import { fetchContacts } from "./redux/contacts/operations";
+import { Routes } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
       <ContactForm />
       {contacts.length !== 0 && <SearchBox />}
       <ContactList />
+      <Routes path="/" element={<Layout />}></Routes>
     </div>
   );
 }

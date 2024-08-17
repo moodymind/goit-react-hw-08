@@ -1,0 +1,22 @@
+.navContainer {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 20px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333333;
+  font-size: 16px;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+}
+
+.navLink:hover {
+  color: #007bff;
+}
+
+.navLink.active {
+  font-weight: bold;
+  color: #007bff;
+}

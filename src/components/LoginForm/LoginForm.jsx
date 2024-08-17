@@ -1,7 +1,9 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import styles from "./LoginForm.module.css";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Not a correct email format").required("Required"),
@@ -14,48 +16,46 @@ const validationSchema = Yup.object().shape({
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-
-    dispatch(
-      login({
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const handleSubmit = (values, actions) => {
+    dispatch(login(values));
+    actions.resetForm();
   };
 
   return (
     <Formik
-      initialValues={{ name: "", email: "", password: "" }}
+      initialValues={{ email: "", password: "" }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {() => (
-        <Form>
-          <label>
-            Email:
-            <Field
-              type="email"
-              name="email"
-              placeholder="Enter your email..."
-            />
-            <ErrorMessage name="name" component="div" className="error" />
-          </label>
-          <label>
-            Password:
-            <Field
-              type="password"
-              name="password"
-              placeholder="Enter your password..."
-            />
-            <ErrorMessage name="name" component="div" className="error" />
-          </label>
-          <button type="submit">Login</button>
-        </Form>
-      )}
+      <Form className={styles.formContainer}>
+        <label className={styles.label}>
+          Email:
+          <Field
+            type="email"
+            name="email"
+            placeholder="Enter your email..."
+            className={styles.field}
+          />
+          <ErrorMessage name="email" component="div" className={styles.error} />
+        </label>
+        <label className={styles.label}>
+          Password:
+          <Field
+            type="password"
+            name="password"
+            placeholder="Enter your password..."
+            className={styles.field}
+          />
+          <ErrorMessage
+            name="password"
+            component="div"
+            className={styles.error}
+          />
+        </label>
+        <button type="submit" className={styles.submitButton}>
+          Login
+        </button>
+      </Form>
     </Formik>
   );
 };

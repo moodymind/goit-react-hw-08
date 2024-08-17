@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { nanoid } from "nanoid";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import styles from "./ContactForm.module.css";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -36,18 +37,32 @@ export const ContactForm = () => {
       onSubmit={handleSubmit}
     >
       {() => (
-        <Form>
-          <label>
-            Name
-            <Field type="text" name="name" />
-            <ErrorMessage name="name" component="div" className="error" />
-          </label>
-          <label>
-            Number
-            <Field type="text" name="number" />
-            <ErrorMessage name="number" component="div" className="error" />
-          </label>
-          <button type="submit">Add Contact</button>
+        <Form className={styles.formContainer}>
+          <div className={styles.formField}>
+            <label>
+              Name
+              <Field type="text" name="name" />
+              <ErrorMessage
+                name="name"
+                component="div"
+                className={styles.error}
+              />
+            </label>
+          </div>
+          <div className={styles.formField}>
+            <label>
+              Number
+              <Field type="text" name="number" />
+              <ErrorMessage
+                name="number"
+                component="div"
+                className={styles.error}
+              />
+            </label>
+          </div>
+          <button type="submit" className={styles.submitButton}>
+            Add Contact
+          </button>
         </Form>
       )}
     </Formik>

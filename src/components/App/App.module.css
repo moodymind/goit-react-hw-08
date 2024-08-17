@@ -1,0 +1,16 @@
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.appHeader {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.appMain {
+  flex: 1;
+  padding: 20px;
+}

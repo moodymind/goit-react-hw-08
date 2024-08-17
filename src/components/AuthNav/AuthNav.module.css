@@ -1,0 +1,23 @@
+.authNav {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.navLink:hover {
+  background-color: #f0f0f0;
+}
+
+.active {
+  background-color: #007bff;
+  color: #fff;
+}

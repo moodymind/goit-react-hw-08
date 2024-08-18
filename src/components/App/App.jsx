@@ -1,12 +1,13 @@
 import React, { lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectToken } from "../../redux/auth/selectors";
+import { selectIsRefreshing } from "../../redux/auth/selectors";
 import { refreshUser } from "../../redux/auth/operations";
 import { Layout } from "../Layout";
 import { RestrictedRoute } from "../RestrictedRoute";
 import { PrivateRoute } from "../PrivateRoute";
 import styles from "./App.module.css";
+import { Audio } from "react-loader-spinner";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
@@ -19,13 +20,29 @@ const ContactsPage = lazy(() =>
 
 function App() {
   const dispatch = useDispatch();
-  const token = useSelector(selectToken);
+  // const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    if (token) {
-      dispatch(refreshUser());
-    }
-  }, [dispatch, token]);
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  // console.log("isRefreshing:", isRefreshing);
+
+  // if (isRefreshing) {
+  //   return (
+  //     <div className={styles.loaderContainer}>
+  //       <Audio
+  //         height="80"
+  //         width="80"
+  //         radius="9"
+  //         color="green"
+  //         ariaLabel="loading"
+  //         wrapperStyle
+  //         wrapperClass
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={styles.appContainer}>
@@ -35,27 +52,15 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route
               path="/register"
-              element={
-                <RestrictedRoute>
-                  <RegistrationPage />
-                </RestrictedRoute>
-              }
+              element={<RestrictedRoute component={RegistrationPage} />}
             />
             <Route
               path="/login"
-              element={
-                <RestrictedRoute>
-                  <LoginPage />
-                </RestrictedRoute>
-              }
+              element={<RestrictedRoute component={LoginPage} />}
             />
             <Route
               path="/contacts"
-              element={
-                <PrivateRoute>
-                  <ContactsPage />
-                </PrivateRoute>
-              }
+              element={<PrivateRoute component={ContactsPage} />}
             />
           </Routes>
         </main>
